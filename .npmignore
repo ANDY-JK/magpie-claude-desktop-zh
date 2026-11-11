@@ -1,0 +1,5 @@
+node_modules/
+*.log
+page/status.js
+.DS_Store
+*.tgz

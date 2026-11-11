@@ -1,0 +1,55 @@
+{
+  "name": "magpie-claude-desktop-zh",
+  "version": "1.0.0",
+  "description": "简体中文界面 for Claude Desktop: a copy of the official client with a self-built zh-Hans catalog, the installed app left untouched",
+  "type": "module",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "lib/",
+    "assets/",
+    "page/index.html",
+    "page/app.js",
+    "page/style.css",
+    "page/icon.svg"
+  ],
+  "keywords": [
+    "magpie-plugin",
+    "magpie",
+    "claude",
+    "claude-desktop",
+    "zh",
+    "zh-Hans",
+    "chinese",
+    "localization"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ANDY-JK/magpie-claude-desktop-zh.git"
+  },
+  "homepage": "https://github.com/ANDY-JK/magpie-claude-desktop-zh#readme",
+  "bugs": {
+    "url": "https://github.com/ANDY-JK/magpie-claude-desktop-zh/issues"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "os": [
+    "win32"
+  ],
+  "magpie": {
+    "page": {
+      "title": "Claude Desktop 中文",
+      "titles": {
+        "zh": "Claude Desktop 中文",
+        "zh-TW": "Claude Desktop 中文"
+      },
+      "file": "page/index.html",
+      "icon": "page/icon.svg",
+      "service": {
+        "port": 3477
+      }
+    }
+  }
+}

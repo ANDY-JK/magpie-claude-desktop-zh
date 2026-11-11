@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Desktop 中文</title>
+<link rel="stylesheet" href="style.css">
+<script src="_magpie/bridge.js"></script>
+<script src="status.js" onerror="window.__claudeZh = window.__claudeZh || null"></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Claude Desktop 中文</h1>
+    <p class="lead">
+      给 Claude Desktop 装一份简体中文界面。官方安装目录一字不改：插件复制一份客户端到别处，
+      把中文语言包打进它的界面资源里，并让它的启动校验对得上。
+    </p>
+  </header>
+
+  <section class="card">
+    <h2>开关</h2>
+    <div class="switch-row">
+      <div>
+        <strong>自动安装 / 更新</strong>
+        <p>magpie 启动或打开本页时，检查官方版本；变了就自动重做一份中文副本。</p>
+      </div>
+      <button type="button" id="auto" role="switch" aria-checked="false" class="sw">—</button>
+    </div>
+    <div class="switch-row">
+      <div>
+        <strong>重建一次</strong>
+        <p>副本看着没问题也重做一遍（界面没更新过来时用）。</p>
+      </div>
+      <button type="button" id="rebuild">重建</button>
+    </div>
+    <div class="switch-row">
+      <div>
+        <strong>移除中文副本</strong>
+        <p>删掉复制出来的客户端（约 750 MB）。官方安装不受影响，随时可以再建。</p>
+      </div>
+      <button type="button" id="remove" class="danger">移除</button>
+    </div>
+    <p class="note" id="msg"></p>
+  </section>
+
+  <section class="card" id="state">
+    <h2>状态</h2>
+    <div class="row"><span>官方安装</span><strong id="install">读取中…</strong></div>
+    <div class="row"><span>中文副本</span><strong id="copy">读取中…</strong></div>
+    <div class="row"><span>中文词条</span><strong id="keys">—</strong></div>
+    <div class="row"><span>校验一致</span><strong id="seal">—</strong></div>
+    <div class="row"><span>本次动作</span><strong id="action">—</strong></div>
+    <div class="row"><span>副本位置</span><code id="app">—</code></div>
+    <div class="row"><span>日志</span><code id="log">—</code></div>
+  </section>
+
+  <section class="card">
+    <h2>怎么用</h2>
+    <ol>
+      <li>打开「<code id="appPath">副本</code>\claude.exe」。它就是中文版，配置与会话与官方版共用。</li>
+      <li>只影响界面文字，不改功能与网络请求。</li>
+      <li>官方版更新后，勾着「自动安装」的话下次启动 magpie 会自动重做。</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2>原理</h2>
+    <p>
+      桌面端的界面语言由 <code>ion-dist.asar</code> 里一份硬编码的 11 项白名单决定，没有中文；
+      而安装目录同时被 ACL 和 <code>claude.exe</code> 内嵌的 asar 头部 SHA256 校验保护着，
+      直接改会启动即崩（<code>Integrity check failed for asar archive entry '&lt;header&gt;'</code>）。
+      所以这里走「复制副本 + 重打包 + 同步内嵌哈希」：官方包不动，副本自洽。
+    </p>
+  </section>
+
+  <p class="foot">
+    <button id="refresh" type="button">刷新状态</button>
+    <span id="at"></span>
+  </p>
+</main>
+</body>
+</html>

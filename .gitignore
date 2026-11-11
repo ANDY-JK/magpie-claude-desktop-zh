@@ -1,0 +1,4 @@
+node_modules/
+*.log
+page/status.js
+*.tgz
